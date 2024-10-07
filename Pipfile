@@ -11,6 +11,7 @@ flask = "*"
 jupyter = "*"
 streamlit = "*"
 sqlalchemy = "*"
+python-dotenv = "*"
 
 [dev-packages]
 tqdm = "*"

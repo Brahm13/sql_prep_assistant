@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 from sqlalchemy.orm import sessionmaker
-from ingestion_pipeline import engine, ChatSession
+from ingestion_pipeline import engine, ChatSession, create_database
 from rag import get_search_result
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -9,12 +9,13 @@ from sqlalchemy.sql import func
 
 # SQLAlchemy session setup
 Session = sessionmaker(bind=engine)
+create_database()
 
 # Streamlit UI
 st.title("SQL Interview Prep Assistant")
 
 # Sidebar for search method selection
-search_method = st.sidebar.selectbox("Choose Search Method", ["RAG", "Index-based", "Hybrid"])
+search_method = st.sidebar.selectbox("Choose Search Method", ["RAG", "Index-Based", "Index-Based-Boosted", "Hybrid"])
 
 # Global variables for conversation management
 if 'conversation_id' not in st.session_state:
@@ -23,8 +24,11 @@ if 'conversation_id' not in st.session_state:
 if 'chat' not in st.session_state:
     st.session_state['chat'] = []  # Initialize chat session
 
+if 'user_input' not in st.session_state:
+    st.session_state['user_input'] = ''  # Initialize input state
+
 # Input area for questions
-user_input = st.text_area("Ask your question here:")
+user_input = st.text_area("Ask your question here:", value=st.session_state['user_input'])
 
 # Monitor dashboard link (will open a new window)
 st.sidebar.markdown("[Monitor Dashboard](#)")
@@ -59,8 +63,8 @@ if st.button("Get Response"):
                 session.add(new_session)
                 session.commit()
 
-            # Automatically clear input for next query
-            st.experimental_rerun()
+            # Clear the user input field after the response is displayed
+            st.session_state['user_input'] = ''  # Clear input for next query
 
 # Display chat history as a single conversation until "New Chat" is clicked
 st.sidebar.header("Conversation History")
