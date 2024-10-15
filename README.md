@@ -54,7 +54,7 @@ SQL_Interview_Prep_Assistant/
     ├── minsearch.py
     ├── rag.py
     └── v1_rag_flow_and_evalution.py
-
+```
 
 ## How to Run the Project
 
