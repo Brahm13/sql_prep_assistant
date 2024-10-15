@@ -15,7 +15,7 @@ This project is an end-to-end implementation of a SQL Interview Preparation Assi
 
 The SQL Interview Prep Assistant is a tool designed to provide SQL interview questions and answers by searching a dataset and offering the most relevant response using three main search methods:
 - **RAG (Retrieval-Augmented Generation)**
-- **Index-based Search** (using `minisearch`)
+- **Index-based Search** (using `minsearch` library)
 - **Hybrid Search** (combining RAG and traditional methods)
 
 The project is built using:
@@ -75,7 +75,7 @@ SQL_Interview_Prep_Assistant/
     
 4.  **Run the Streamlit Interface:** To start the Streamlit app for interacting with the SQL Interview Prep Assistant, run the following command:
     `streamlit run sql_assistant/assistant.py` 
-    
+    ![path to UI Screenshot](data/Streamlit_UI.png)
 5.  **Jupyter Notebook for Reproducibility:** You can run the core logic and evaluations in the provided Jupyter notebooks inside the `notebooks/` directory:
     `jupyter notebook notebooks/v1_rag_flow_and_evalution.ipynb` 
     
@@ -119,7 +119,7 @@ The following areas are still under development or require improvements:
 
 1.  **Monitoring Dashboard:** The monitor dashboard link currently throws an error (`OperationalError: no such table: chat_sessions`). This needs to be fixed.
 2.  **Reproducibility & Containerization:** While Pipenv is used for dependency management, the project still lacks containerization (e.g., Docker).
-3.  **Search Method Bug Fixes:** Only the RAG method is fully functional. Index-based and hybrid search methods require further debugging to work correctly.
+3.  **Search Method Bug Fixes:** Only the RAG method is fully functional on streamlit UI (working using notebook). Index-based and hybrid search methods require further debugging to work correctly.
 
 
 ## Dependencies
